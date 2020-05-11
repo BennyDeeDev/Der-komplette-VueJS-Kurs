@@ -1,12 +1,13 @@
 <template>
-  <div id="app">{{ message }}</div>
+  <div v-bind:style="{color: activeColor}">{{ message }}</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      message: "Hello Vue!"
+      message: "Hello Vue!",
+      activeColor: "green"
     };
   }
 };
