@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{color: activeColor}">{{ message }}</div>
+  <div v-bind:style="{color: activeColor}" v-if="showMessage">{{ message }}</div>
 </template>
 
 <script>
@@ -7,7 +7,8 @@ export default {
   data() {
     return {
       message: "Hello Vue!",
-      activeColor: "green"
+      activeColor: "green",
+      showMessage: false
     };
   }
 };
