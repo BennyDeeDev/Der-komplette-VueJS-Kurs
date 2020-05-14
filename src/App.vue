@@ -4,6 +4,7 @@
     <div v-for="(todo,index) in todos" :key="index">{{ todo.text }}</div>
     <button v-on:click="addToDo">Hinzufügen</button>
     <input v-model="message" />
+    <button v-on:click="resetToDo">RESET</button>
   </div>
 </template>
 
@@ -25,6 +26,9 @@ export default {
   methods: {
     addToDo() {
       this.todos.push({ text: "Eine geile ToDo App bauen" });
+    },
+    resetToDo() {
+      this.todos = [];
     }
   }
 };
