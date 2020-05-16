@@ -14,23 +14,18 @@
     <input @change="addToDo" />
 
     <h2>Active ToDos</h2>
-    <div v-for="todo in activeToDos" :key="todo.id">
-      <input type="checkbox" v-model="todo.done" />
-      {{ todo.title }}
-      <button v-on:click="deleteToDo(todo.id)">X</button>
-    </div>
-
+    <ToDoItem v-for="todo in activeToDos" :key="todo.id" v-bind:todo="todo" />
     <h2>Done ToDos</h2>
-    <div v-for="todo in doneToDos" :key="todo.id">
-      <input type="checkbox" v-model="todo.done" />
-      {{ todo.title }}
-      <button v-on:click="deleteToDo(todo.id)">X</button>
-    </div>
+    <ToDoItem v-for="todo in doneToDos" :key="todo.id" v-bind:todo="todo" />
   </div>
 </template>
 
 <script>
+import ToDoItem from "@/components/ToDoItem.vue";
 export default {
+  components: {
+    ToDoItem
+  },
   data() {
     return {
       todos: [
