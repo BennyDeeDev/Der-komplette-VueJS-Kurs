@@ -3,11 +3,12 @@
     <h2>Search To Dos</h2>
     <input v-model="searchQuery" />
     <div v-if="searchQuery">
-      <div v-for="todo in filterToDos" :key="todo.id">
-        <input type="checkbox" v-model="todo.done" />
-        {{ todo.title }}
-        <button v-on:click="deleteToDo(todo.id)">X</button>
-      </div>
+      <ToDoItem
+        v-for="todo in filterToDos"
+        :key="todo.id"
+        v-bind:todo="todo"
+        v-on:onDeleteToDo="deleteToDo"
+      />
     </div>
 
     <h2>Add To Do</h2>
