@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>ToDos</h1>
-    <h1>Login</h1>
+    <h1> <router-link to="{name: ToDoList}"> ToDos</h1>
+    <h1> <router-link to="{name: Login}"> Login</h1>
   </div>
 </template>
 
