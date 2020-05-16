@@ -7,20 +7,19 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    component: ToDoList,
-    name: "ToDoList",
     path: "/",
+    name: "ToDoList",
+    component: ToDoList,
   },
   {
-    component: Login,
-    name: "Login",
     path: "/login",
+    name: "Login",
+    component: Login,
   },
 ];
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
   routes,
 });
 

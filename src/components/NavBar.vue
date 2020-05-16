@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>
-      <router-link to="{name: ToDoList}">ToDos</router-link>
+      <router-link :to="{name: 'ToDoList'}">ToDos</router-link>
     </h1>
     <h1>
-      <router-link to="{name: Login}">Login</router-link>
+      <router-link :to="{name: 'Login'}">Login</router-link>
     </h1>
   </div>
 </template>
