@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="checkbox" v-model="todo.done" />
-    <router-link>{{ todo.title }}</router-link>
+    <router-link :to="{name: 'ToDoDetails', params: {id: todo.id} }">{{ todo.title }}</router-link>
     <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
   </div>
 </template>
