@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import ToDoService from "@/services/ToDoService";
+import router from "../../router/index";
 
 Vue.use(Vuex);
 
@@ -26,6 +27,9 @@ export default {
         TOGGLE_DONE(state, { id, done }) {
             state.todos[state.todos.findIndex((todo) => Number(id) === todo.id)].done = done;
         },
+        CHANGE_TITLE(state, { id, title }) {
+            state.todos[state.todos.findIndex((todo) => Number(id) === todo.id)].title = title;
+        },
     },
     actions: {
         fetchToDos({ commit }) {
@@ -50,6 +54,14 @@ export default {
                 .then(({ data }) => {
                     console.log(data);
                     commit("TOGGLE_DONE", data);
+                })
+                .catch((Error) => console.log(Error));
+        },
+        updateToDo({ commit }, todo) {
+            ToDoService.updateToDo(todo)
+                .then(() => {
+                    commit("CHANGE_TITLE", todo);
+                    router.push({ name: "ToDoList" });
                 })
                 .catch((Error) => console.log(Error));
         },

@@ -3,16 +3,16 @@
         <h2>Search To Dos</h2>
         <input v-model="$store.state.searchQuery" />
         <div v-if="$store.state.searchQuery">
-            <ToDoItem v-for="todo in getFilteredToDos" :key="todo.id" v-bind:todo="todo" />
+            <ToDoItem v-for="todo in filteredToDos" :key="todo.id" v-bind:todo="todo" />
         </div>
 
         <h2>Add To Do</h2>
         <input @change="addToDo" />
 
         <h2>Active ToDos</h2>
-        <ToDoItem v-for="todo in getActiveToDos" :key="todo.id" v-bind:todo="todo" />
+        <ToDoItem v-for="todo in activeToDos" :key="todo.id" v-bind:todo="todo" />
         <h2>Done ToDos</h2>
-        <ToDoItem v-for="todo in getDoneToDos" :key="todo.id" v-bind:todo="todo" />
+        <ToDoItem v-for="todo in doneToDos" :key="todo.id" v-bind:todo="todo" />
     </div>
 </template>
 
@@ -31,13 +31,13 @@ export default {
         this.$store.dispatch("fetchToDos");
     },
     computed: {
-        getActiveToDos() {
+        activeToDos() {
             return this.$store.getters.activeToDos;
         },
-        getDoneToDos() {
+        doneToDos() {
             return this.$store.getters.doneToDos;
         },
-        getFilteredToDos() {
+        filteredToDos() {
             return this.$store.getters.filterToDos;
         },
     },
