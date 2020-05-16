@@ -23,6 +23,9 @@ export default new Vuex.Store({
         SET_TODOS(state, data) {
             state.todos = data;
         },
+        TOGGLE_DONE(state, { id, done }) {
+            state.todos[state.todos.findIndex((todo) => Number(id) === todo.id)].done = done;
+        },
     },
     actions: {
         fetchToDos({ commit }) {
@@ -42,6 +45,14 @@ export default new Vuex.Store({
                 })
                 .catch((Error) => console.log(Error));
         },
+        doneToDo({ commit, getters }, id) {
+            ToDoService.doneToDo({ id, done: getters.getToDoById(id).done })
+                .then(({ data }) => {
+                    console.log(data);
+                    commit("TOGGLE_DONE", data);
+                })
+                .catch((Error) => console.log(Error));
+        },
     },
     getters: {
         activeToDos: (state) => {
@@ -52,6 +63,9 @@ export default new Vuex.Store({
         },
         filterToDos: (state) => {
             return state.todos.filter((item) => item.title.toLowerCase().startsWith(state.searchQuery.toLowerCase()));
+        },
+        getToDoById: (state) => (id) => {
+            return state.todos.find((todo) => id === todo.id);
         },
     },
 });
