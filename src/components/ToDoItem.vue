@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="checkbox" v-model="todo.done" />
-    {{ todo.title }}
+    <router-link>{{ todo.title }}</router-link>
     <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
   </div>
 </template>

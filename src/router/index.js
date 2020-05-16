@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import ToDoList from "@/components/ToDoList.vue";
 import Login from "@/components/Login.vue";
+import ToDoItem from "@/components/ToDoItem.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/todo/:id",
+    name: "TodoItem",
+    component: ToDoItem,
   },
 ];
 
