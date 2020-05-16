@@ -1,7 +1,16 @@
 <template>
   <div>
     <input @change="addToDo" />
-    <div v-for="(todo,index) in todos" :key="index">
+
+    <h2>Active ToDos</h2>
+    <div v-for="todo in activeToDos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done" />
+      {{ todo.text }}
+      <button v-on:click="deleteToDo(todo.id)">X</button>
+    </div>
+
+    <h2>Done ToDos</h2>
+    <div v-for="todo in doneToDos" :key="todo.id">
       <input type="checkbox" v-model="todo.done" />
       {{ todo.text }}
       <button v-on:click="deleteToDo(todo.id)">X</button>
@@ -30,6 +39,14 @@ export default {
         this.todos.findIndex(item => item.id === id),
         1
       );
+    }
+  },
+  computed: {
+    activeToDos() {
+      return this.todos.filter(item => !item.done);
+    },
+    doneToDos() {
+      return this.todos.filter(item => item.done);
     }
   }
 };
