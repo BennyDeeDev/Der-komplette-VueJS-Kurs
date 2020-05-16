@@ -1,33 +1,18 @@
 <template>
   <div>
     <h2>Search To Dos</h2>
-    <input v-model="searchQuery" />
-    <div v-if="searchQuery">
-      <ToDoItem
-        v-for="todo in filterToDos"
-        :key="todo.id"
-        v-bind:todo="todo"
-        v-on:onDeleteToDo="deleteToDo"
-      />
+    <input v-model="$store.state.searchQuery" />
+    <div v-if="$store.state.searchQuery">
+      <ToDoItem v-for="todo in getFilteredToDos" :key="todo.id" v-bind:todo="todo" />
     </div>
 
     <h2>Add To Do</h2>
     <input @change="addToDo" />
 
     <h2>Active ToDos</h2>
-    <ToDoItem
-      v-for="todo in activeToDos"
-      :key="todo.id"
-      v-bind:todo="todo"
-      v-on:onDeleteToDo="deleteToDo"
-    />
+    <ToDoItem v-for="todo in getActiveToDos" :key="todo.id" v-bind:todo="todo" />
     <h2>Done ToDos</h2>
-    <ToDoItem
-      v-for="todo in doneToDos"
-      :key="todo.id"
-      v-bind:todo="todo"
-      v-on:onDeleteToDo="deleteToDo"
-    />
+    <ToDoItem v-for="todo in getDoneToDos" :key="todo.id" v-bind:todo="todo" />
   </div>
 </template>
 
@@ -37,39 +22,20 @@ export default {
   components: {
     ToDoItem
   },
-  data() {
-    return {
-      todos: [
-        { id: 1, title: "HTML & CSS lernen", done: true },
-        { id: 2, title: "JavaScript lernen", done: true },
-        { id: 3, title: "Vue lernen", done: false }
-      ],
-      counter: 4,
-      searchQuery: ""
-    };
-  },
   methods: {
     addToDo(e) {
-      this.todos.push({ id: this.counter++, title: e.target.value });
-    },
-    deleteToDo(id) {
-      this.todos.splice(
-        this.todos.findIndex(item => item.id === id),
-        1
-      );
+      this.$store.commit("ADD_TODO", e.target.value);
     }
   },
   computed: {
-    activeToDos() {
-      return this.todos.filter(item => !item.done);
+    getActiveToDos() {
+      return this.$store.getters.activeToDos;
     },
-    doneToDos() {
-      return this.todos.filter(item => item.done);
+    getDoneToDos() {
+      return this.$store.getters.doneToDos;
     },
-    filterToDos() {
-      return this.todos.filter(item =>
-        item.title.toLowerCase().startsWith(this.searchQuery.toLowerCase())
-      );
+    getFilteredToDos() {
+      return this.$store.getters.filterToDos;
     }
   }
 };

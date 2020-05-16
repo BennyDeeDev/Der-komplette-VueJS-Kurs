@@ -2,7 +2,7 @@
   <div>
     <input type="checkbox" v-model="todo.done" />
     <router-link :to="{name: 'ToDoDetails', params: {id: todo.id} }">{{ todo.title }}</router-link>
-    <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
+    <button v-on:click="handleDelete(todo.id)">X</button>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
     todo: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    handleDelete(id) {
+      this.$store.commit("DELETE_TODO", id);
     }
   }
 };
